@@ -11,12 +11,12 @@ async function bootstrap() {
   app.enableCors();
 
   const config = new DocumentBuilder()
-    .setTitle('API Rest SIS257')
+    .setTitle('SIS257 - 23/11/2023')
     .setDescription(
-      'Backend de la materia Desarrollo de Aplicación Int/Internet II',
+      'Presentacion Final de laboratorio s2_2023\nBryan Pilcolora Mendoza\nDaniela M. Lizondo',
     )
     .setVersion('1.0')
-    .addTag('interpretes, generos')
+    .addTag('Por defecto')
     .addBearerAuth({
       type: 'http',
       scheme: 'bearer',
@@ -27,7 +27,7 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('apidoc', app, document);
 
-  await app.listen(process.env.PORT);
-  console.log(`API cooriendo en ${await app.getUrl()}/apidoc`);
+  await app.listen(process.env.PORT || 3000);
+  console.log(`Api corriendo en ${await app.getUrl()}/apidoc`);
 }
 bootstrap();

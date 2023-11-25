@@ -1,9 +1,9 @@
-import { Injectable } from '@nestjs/common';
-import { PassportStrategy } from '@nestjs/passport';
-import { AuthService } from '../auth.service';
-import { ExtractJwt, Strategy } from 'passport-jwt';
-import { JwtPayload } from '../interfaces/jwt-payload.interface';
-import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { Injectable } from "@nestjs/common";
+import { PassportStrategy } from "@nestjs/passport";
+import { ExtractJwt, Strategy } from "passport-jwt";
+import { AuthService } from "../auth.service";
+import { JwtPayload } from "../interfaces/jwt-payload.interface";
+import { UsuarioEntity } from "src/usuario/entities/usuario.entity";
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
@@ -16,7 +16,7 @@ export class JwtStrategy extends PassportStrategy(Strategy, 'jwt') {
     });
   }
 
-  async validate(payload: JwtPayload): Promise<Usuario> {
+  async validate(payload: JwtPayload): Promise<UsuarioEntity> {
     return await this.authService.verifyPayload(payload);
   }
 }

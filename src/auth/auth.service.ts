@@ -1,14 +1,16 @@
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { JwtService } from '@nestjs/jwt';
-import { UsuariosService } from 'src/usuarios/usuarios.service';
+import { UsuarioService } from 'src/usuario/usuario.service';
 import { AuthLoginDto } from './dto/auth-login.dto';
 import { JwtPayload } from './interfaces/jwt-payload.interface';
-import { Usuario } from 'src/usuarios/entities/usuario.entity';
+import { UsuarioEntity } from 'src/usuario/entities/usuario.entity';
+import { JwtService } from '@nestjs/jwt';
 
+@Injectable()
+export class authService {}
 @Injectable()
 export class AuthService {
   constructor(
-    private usuarioService: UsuariosService,
+    private usuarioService: UsuarioService,
     private jwtService: JwtService,
   ) {}
 
@@ -30,8 +32,8 @@ export class AuthService {
     return accessToken;
   }
 
-  async verifyPayload(payload: JwtPayload): Promise<Usuario> {
-    let usuario: Usuario;
+  async verifyPayload(payload: JwtPayload): Promise<UsuarioEntity> {
+    let usuario: UsuarioEntity;
 
     try {
       usuario = await this.usuarioService.findOne(payload.sub);
